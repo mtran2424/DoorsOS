@@ -267,6 +267,12 @@ public class PagingProcess extends UserlandProcess{
             }
         }
         System.out.println("Should have map of page at index 1 because thats where 1K hole is.\n");
+
+        // Test illegal memory access
+        System.out.println("Test for access on illegal memory access");
+        Write(10240, (byte) 1);
+
+        System.out.println("Should not print.");
     }
     
 }

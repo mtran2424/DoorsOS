@@ -314,4 +314,11 @@ public class Kernel implements Device{
     public FakeFileSystem GetFakeFileSystem() {
         return virtualFileSytem.GetFakeFileSystem();
     }
+
+    /*
+     * Kills process
+     */
+    public void KillProcess() {
+        scheduler.Kill();
+    }
 }

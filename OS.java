@@ -136,6 +136,11 @@ public class OS {
         // Assign new mapping to TLB
         UserlandProcess.translationLookasideBuffer[randomNumber][0] = virtualPageNumber;
         
+        // Kill if memory access is illegal
+        if(kernel.GetPageMapping(virtualPageNumber) == null) {
+            kernel.KillProcess();
+        }
+        
         // If there is no physical mapping to the virtual page
         if( kernel.GetPhyicalMapping(virtualPageNumber) == -1) {
             // Find a random process with a physical mapping to take page from

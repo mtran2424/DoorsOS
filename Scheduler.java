@@ -335,6 +335,26 @@ public class Scheduler {
     }
 
     /*
+     * Kills process
+     */
+    public void Kill() {
+        if(currentlyRunning != null) {
+            // Need temp to stop after switch
+            KernelandProcess temp = currentlyRunning;
+
+            // Remove process from queue of awake processes
+            RemoveCurrentlyRunning();
+            // Unreference currentlyRunning from the proc as it is not going to be running anymore
+            currentlyRunning = null;
+
+            SwitchProcess();
+
+            temp.stop();
+        }
+        
+    }
+
+    /*
      * Adds target process to appropriate queue for eligible processes to run
      */
     private void EnqueueProcess(KernelandProcess target) {
