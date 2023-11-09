@@ -342,6 +342,15 @@ public class Scheduler {
             // Need temp to stop after switch
             KernelandProcess temp = currentlyRunning;
 
+            // Remove from process map
+            processMap.remove(currentlyRunning.getpid());
+            
+            // Close devices of process
+            CloseProcessDevices();
+                
+            // Free currently running process once process terminates
+            FreeMemory();
+
             // Remove process from queue of awake processes
             RemoveCurrentlyRunning();
             // Unreference currentlyRunning from the proc as it is not going to be running anymore
